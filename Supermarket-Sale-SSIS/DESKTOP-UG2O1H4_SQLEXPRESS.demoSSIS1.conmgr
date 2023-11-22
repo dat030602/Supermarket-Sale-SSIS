@@ -1,0 +1,10 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="DESKTOP-UG2O1H4_SQLEXPRESS.demoSSIS1"
+  DTS:DTSID="{B3EAC0C7-8F18-45E5-9679-E659E53E0870}"
+  DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=DESKTOP-UG2O1H4\SQLEXPRESS;Initial Catalog=demoSSIS;Integrated Security=True;Application Name=SSIS-Supermarket-Sale-SSIS-{B3EAC0C7-8F18-45E5-9679-E659E53E0870}DESKTOP-UG2O1H4\SQLEXPRESS.demoSSIS1;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>
