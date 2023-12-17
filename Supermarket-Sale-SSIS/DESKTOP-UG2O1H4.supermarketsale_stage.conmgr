@@ -1,0 +1,10 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="DESKTOP-UG2O1H4.supermarketsale_stage"
+  DTS:DTSID="{6826D0FB-F87E-45AD-8786-443FE393B28C}"
+  DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=localhost;Initial Catalog=supermarketsale_stage;Integrated Security=True;Application Name=SSIS-Supermarket-Sale-SSIS-{6826D0FB-F87E-45AD-8786-443FE393B28C}DESKTOP-UG2O1H4.supermarketsale_stage;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

@@ -1,0 +1,2720 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/22/2023 7:30:14 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-UG2O1H4"
+  DTS:CreatorName="DESKTOP-UG2O1H4\dat03"
+  DTS:DTSID="{056CB5BB-7BEC-4855-BB7D-010EB6EC1DD1}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5314.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Xls2Source"
+  DTS:PackageType="5"
+  DTS:VersionBuild="10"
+  DTS:VersionGUID="{A4181F3D-FFAD-45FC-86A5-6F87D14F54D9}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-UG2O1H4.supermarketsale_source1]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{1B07E595-3592-4220-8075-F2C1561321ED}"
+      DTS:ObjectName="DESKTOP-UG2O1H4.supermarketsale_source1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=supermarketsale_source;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Xls2Source-{1B07E595-3592-4220-8075-F2C1561321ED}DESKTOP-UG2O1H4.supermarketsale_source1;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Sales Source]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{21517229-CCE2-4F5A-B4CD-A30CDF2B3FDA}"
+      DTS:ObjectName="Excel Sales Source">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="0"
+          DTS:ConnectRetryInterval="0"
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.16.0;Data Source=D:\code\SSIS\Supermarket-Sale-SSIS\Script\supermarket_sales.xls;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Excel To Source"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{C0A149F7-40A4-4FF6-A120-77AD7FF05FBA}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Excel To Source"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Excel To Source\City Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="City Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Excel To Source\City Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Excel To Source\City Conversion.Inputs[Data Conversion Input].Columns[City]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="City"
+                      lineageId="Package\Excel To Source\City Source  Excel.Outputs[Excel Source Output].Columns[City]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\City Conversion.Inputs[Data Conversion Input].Columns[Branch]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Branch"
+                      lineageId="Package\Excel To Source\City Source  Excel.Outputs[Excel Source Output].Columns[Branch]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Excel To Source\City Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Excel To Source\City Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Excel To Source\City Conversion.Outputs[Data Conversion Output].Columns[Copy of City]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="10"
+                      lineageId="Package\Excel To Source\City Conversion.Outputs[Data Conversion Output].Columns[Copy of City]"
+                      name="Copy of City"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Excel To Source\City Source  Excel.Outputs[Excel Source Output].Columns[City]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Excel To Source\City Conversion.Outputs[Data Conversion Output].Columns[Copy of Branch]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="1"
+                      lineageId="Package\Excel To Source\City Conversion.Outputs[Data Conversion Output].Columns[Copy of Branch]"
+                      name="Copy of Branch"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Excel To Source\City Source  Excel.Outputs[Excel Source Output].Columns[Branch]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Excel To Source\City Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Excel To Source\City Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Excel To Source\City Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Excel To Source\City Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Excel To Source\City Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Excel To Source\City Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Excel To Source\City Source  Excel"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="City Source  Excel"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">city$</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Excel To Source\City Source  Excel.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Sales Source]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Sales Source]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Excel To Source\City Source  Excel.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Excel To Source\City Source  Excel.Outputs[Excel Source Output].Columns[Branch]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Excel To Source\City Source  Excel.Outputs[Excel Source Output].ExternalColumns[Branch]"
+                      length="255"
+                      lineageId="Package\Excel To Source\City Source  Excel.Outputs[Excel Source Output].Columns[Branch]"
+                      name="Branch"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Excel To Source\City Source  Excel.Outputs[Excel Source Output].Columns[City]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Excel To Source\City Source  Excel.Outputs[Excel Source Output].ExternalColumns[City]"
+                      length="255"
+                      lineageId="Package\Excel To Source\City Source  Excel.Outputs[Excel Source Output].Columns[City]"
+                      name="City"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\City Source  Excel.Outputs[Excel Source Output].ExternalColumns[Branch]"
+                      dataType="wstr"
+                      length="255"
+                      name="Branch" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\City Source  Excel.Outputs[Excel Source Output].ExternalColumns[City]"
+                      dataType="wstr"
+                      length="255"
+                      name="City" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Excel To Source\City Source  Excel.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Excel To Source\City Source  Excel.Outputs[Excel Source Error Output].Columns[Branch]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Excel To Source\City Source  Excel.Outputs[Excel Source Error Output].Columns[Branch]"
+                      name="Branch" />
+                    <outputColumn
+                      refId="Package\Excel To Source\City Source  Excel.Outputs[Excel Source Error Output].Columns[City]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Excel To Source\City Source  Excel.Outputs[Excel Source Error Output].Columns[City]"
+                      name="City" />
+                    <outputColumn
+                      refId="Package\Excel To Source\City Source  Excel.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Excel To Source\City Source  Excel.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Excel To Source\City Source  Excel.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Excel To Source\City Source  Excel.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Excel To Source\City_Source"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="City_Source"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[city_source]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Excel To Source\City_Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-UG2O1H4.supermarketsale_source1]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-UG2O1H4.supermarketsale_source1]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Excel To Source\City_Source.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Excel To Source\City_Source.Inputs[OLE DB Destination Input].Columns[Copy of Branch]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Copy of Branch"
+                      externalMetadataColumnId="Package\Excel To Source\City_Source.Inputs[OLE DB Destination Input].ExternalColumns[Branch]"
+                      lineageId="Package\Excel To Source\City Conversion.Outputs[Data Conversion Output].Columns[Copy of Branch]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\City_Source.Inputs[OLE DB Destination Input].Columns[Copy of City]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Copy of City"
+                      externalMetadataColumnId="Package\Excel To Source\City_Source.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      lineageId="Package\Excel To Source\City Conversion.Outputs[Data Conversion Output].Columns[Copy of City]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\City_Source.Inputs[OLE DB Destination Input].ExternalColumns[Branch]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Branch" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\City_Source.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="City" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Excel To Source\City_Source.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Excel To Source\City_Source.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Excel To Source\City_Source.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Excel To Source\City_Source.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Excel To Source\City_Source.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Excel To Source\City_Source.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Excel To Source\Product Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Product Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Excel To Source\Product Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Excel To Source\Product Conversion.Inputs[Data Conversion Input].Columns[ProductID]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="ProductID"
+                      lineageId="Package\Excel To Source\Product Source Excel.Outputs[Excel Source Output].Columns[ProductID]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\Product Conversion.Inputs[Data Conversion Input].Columns[Unit price]"
+                      cachedDataType="r8"
+                      cachedName="Unit price"
+                      lineageId="Package\Excel To Source\Product Source Excel.Outputs[Excel Source Output].Columns[Unit price]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\Product Conversion.Inputs[Data Conversion Input].Columns[ProductLine]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="ProductLine"
+                      lineageId="Package\Excel To Source\Product Source Excel.Outputs[Excel Source Output].Columns[ProductLine]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Excel To Source\Product Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Excel To Source\Product Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Excel To Source\Product Conversion.Outputs[Data Conversion Output].Columns[Copy of ProductID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="20"
+                      lineageId="Package\Excel To Source\Product Conversion.Outputs[Data Conversion Output].Columns[Copy of ProductID]"
+                      name="Copy of ProductID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Excel To Source\Product Source Excel.Outputs[Excel Source Output].Columns[ProductID]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Excel To Source\Product Conversion.Outputs[Data Conversion Output].Columns[Copy of Unit price]"
+                      dataType="r4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Excel To Source\Product Conversion.Outputs[Data Conversion Output].Columns[Copy of Unit price]"
+                      name="Copy of Unit price"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Excel To Source\Product Source Excel.Outputs[Excel Source Output].Columns[Unit price]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Excel To Source\Product Conversion.Outputs[Data Conversion Output].Columns[Copy of ProductLine]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="5"
+                      lineageId="Package\Excel To Source\Product Conversion.Outputs[Data Conversion Output].Columns[Copy of ProductLine]"
+                      name="Copy of ProductLine"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Excel To Source\Product Source Excel.Outputs[Excel Source Output].Columns[ProductLine]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Excel To Source\Product Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Excel To Source\Product Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Excel To Source\Product Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Excel To Source\Product Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Product Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Excel To Source\Product Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Excel To Source\Product Source Excel"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="Product Source Excel"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">product$</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Excel To Source\Product Source Excel.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Sales Source]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Sales Source]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Excel To Source\Product Source Excel.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Excel To Source\Product Source Excel.Outputs[Excel Source Output].Columns[ProductID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Excel To Source\Product Source Excel.Outputs[Excel Source Output].ExternalColumns[ProductID]"
+                      length="255"
+                      lineageId="Package\Excel To Source\Product Source Excel.Outputs[Excel Source Output].Columns[ProductID]"
+                      name="ProductID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Product Source Excel.Outputs[Excel Source Output].Columns[Unit price]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Excel To Source\Product Source Excel.Outputs[Excel Source Output].ExternalColumns[Unit price]"
+                      lineageId="Package\Excel To Source\Product Source Excel.Outputs[Excel Source Output].Columns[Unit price]"
+                      name="Unit price"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Product Source Excel.Outputs[Excel Source Output].Columns[ProductLine]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Excel To Source\Product Source Excel.Outputs[Excel Source Output].ExternalColumns[ProductLine]"
+                      length="255"
+                      lineageId="Package\Excel To Source\Product Source Excel.Outputs[Excel Source Output].Columns[ProductLine]"
+                      name="ProductLine"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Product Source Excel.Outputs[Excel Source Output].ExternalColumns[ProductID]"
+                      dataType="wstr"
+                      length="255"
+                      name="ProductID" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Product Source Excel.Outputs[Excel Source Output].ExternalColumns[Unit price]"
+                      dataType="r8"
+                      name="Unit price" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Product Source Excel.Outputs[Excel Source Output].ExternalColumns[ProductLine]"
+                      dataType="wstr"
+                      length="255"
+                      name="ProductLine" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Excel To Source\Product Source Excel.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Excel To Source\Product Source Excel.Outputs[Excel Source Error Output].Columns[ProductID]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Excel To Source\Product Source Excel.Outputs[Excel Source Error Output].Columns[ProductID]"
+                      name="ProductID" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Product Source Excel.Outputs[Excel Source Error Output].Columns[Unit price]"
+                      dataType="r8"
+                      lineageId="Package\Excel To Source\Product Source Excel.Outputs[Excel Source Error Output].Columns[Unit price]"
+                      name="Unit price" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Product Source Excel.Outputs[Excel Source Error Output].Columns[ProductLine]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Excel To Source\Product Source Excel.Outputs[Excel Source Error Output].Columns[ProductLine]"
+                      name="ProductLine" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Product Source Excel.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Excel To Source\Product Source Excel.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Product Source Excel.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Excel To Source\Product Source Excel.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Excel To Source\Productline Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Productline Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Excel To Source\Productline Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Excel To Source\Productline Conversion.Inputs[Data Conversion Input].Columns[Product line]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Product line"
+                      lineageId="Package\Excel To Source\Productline Source  Excel.Outputs[Excel Source Output].Columns[Product line]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\Productline Conversion.Inputs[Data Conversion Input].Columns[ProductLineID]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="ProductLineID"
+                      lineageId="Package\Excel To Source\Productline Source  Excel.Outputs[Excel Source Output].Columns[ProductLineID]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Excel To Source\Productline Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Excel To Source\Productline Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Excel To Source\Productline Conversion.Outputs[Data Conversion Output].Columns[Copy of Product line]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="30"
+                      lineageId="Package\Excel To Source\Productline Conversion.Outputs[Data Conversion Output].Columns[Copy of Product line]"
+                      name="Copy of Product line"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Excel To Source\Productline Source  Excel.Outputs[Excel Source Output].Columns[Product line]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Excel To Source\Productline Conversion.Outputs[Data Conversion Output].Columns[Copy of ProductLineID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="5"
+                      lineageId="Package\Excel To Source\Productline Conversion.Outputs[Data Conversion Output].Columns[Copy of ProductLineID]"
+                      name="Copy of ProductLineID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Excel To Source\Productline Source  Excel.Outputs[Excel Source Output].Columns[ProductLineID]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Excel To Source\Productline Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Excel To Source\Productline Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Excel To Source\Productline Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Excel To Source\Productline Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Productline Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Excel To Source\Productline Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Excel To Source\Productline Source  Excel"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="Productline Source  Excel"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">ProductLine$</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Excel To Source\Productline Source  Excel.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Sales Source]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Sales Source]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Excel To Source\Productline Source  Excel.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Excel To Source\Productline Source  Excel.Outputs[Excel Source Output].Columns[Product line]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Excel To Source\Productline Source  Excel.Outputs[Excel Source Output].ExternalColumns[Product line]"
+                      length="255"
+                      lineageId="Package\Excel To Source\Productline Source  Excel.Outputs[Excel Source Output].Columns[Product line]"
+                      name="Product line"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Productline Source  Excel.Outputs[Excel Source Output].Columns[ProductLineID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Excel To Source\Productline Source  Excel.Outputs[Excel Source Output].ExternalColumns[ProductLineID]"
+                      length="255"
+                      lineageId="Package\Excel To Source\Productline Source  Excel.Outputs[Excel Source Output].Columns[ProductLineID]"
+                      name="ProductLineID"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Productline Source  Excel.Outputs[Excel Source Output].ExternalColumns[Product line]"
+                      dataType="wstr"
+                      length="255"
+                      name="Product line" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Productline Source  Excel.Outputs[Excel Source Output].ExternalColumns[ProductLineID]"
+                      dataType="wstr"
+                      length="255"
+                      name="ProductLineID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Excel To Source\Productline Source  Excel.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Excel To Source\Productline Source  Excel.Outputs[Excel Source Error Output].Columns[Product line]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Excel To Source\Productline Source  Excel.Outputs[Excel Source Error Output].Columns[Product line]"
+                      name="Product line" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Productline Source  Excel.Outputs[Excel Source Error Output].Columns[ProductLineID]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Excel To Source\Productline Source  Excel.Outputs[Excel Source Error Output].Columns[ProductLineID]"
+                      name="ProductLineID" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Productline Source  Excel.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Excel To Source\Productline Source  Excel.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Productline Source  Excel.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Excel To Source\Productline Source  Excel.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Excel To Source\Productline_Source"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Productline_Source"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[productline_source]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Excel To Source\Productline_Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-UG2O1H4.supermarketsale_source1]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-UG2O1H4.supermarketsale_source1]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Excel To Source\Productline_Source.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Excel To Source\Productline_Source.Inputs[OLE DB Destination Input].Columns[Copy of ProductLineID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="Copy of ProductLineID"
+                      externalMetadataColumnId="Package\Excel To Source\Productline_Source.Inputs[OLE DB Destination Input].ExternalColumns[ProductLineID]"
+                      lineageId="Package\Excel To Source\Productline Conversion.Outputs[Data Conversion Output].Columns[Copy of ProductLineID]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\Productline_Source.Inputs[OLE DB Destination Input].Columns[Copy of Product line]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="30"
+                      cachedName="Copy of Product line"
+                      externalMetadataColumnId="Package\Excel To Source\Productline_Source.Inputs[OLE DB Destination Input].ExternalColumns[ProductLine]"
+                      lineageId="Package\Excel To Source\Productline Conversion.Outputs[Data Conversion Output].Columns[Copy of Product line]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Productline_Source.Inputs[OLE DB Destination Input].ExternalColumns[ProductLineID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="ProductLineID" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Productline_Source.Inputs[OLE DB Destination Input].ExternalColumns[ProductLine]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="ProductLine" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Excel To Source\Productline_Source.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Excel To Source\Productline_Source.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Excel To Source\Productline_Source.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Excel To Source\Productline_Source.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Productline_Source.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Excel To Source\Productline_Source.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Excel To Source\Product_Source"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Product_Source"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[product_source]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Excel To Source\Product_Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-UG2O1H4.supermarketsale_source1]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-UG2O1H4.supermarketsale_source1]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Excel To Source\Product_Source.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Excel To Source\Product_Source.Inputs[OLE DB Destination Input].Columns[Copy of ProductID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="Copy of ProductID"
+                      externalMetadataColumnId="Package\Excel To Source\Product_Source.Inputs[OLE DB Destination Input].ExternalColumns[ProductID]"
+                      lineageId="Package\Excel To Source\Product Conversion.Outputs[Data Conversion Output].Columns[Copy of ProductID]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\Product_Source.Inputs[OLE DB Destination Input].Columns[Copy of Unit price]"
+                      cachedDataType="r4"
+                      cachedName="Copy of Unit price"
+                      externalMetadataColumnId="Package\Excel To Source\Product_Source.Inputs[OLE DB Destination Input].ExternalColumns[UnitPrice]"
+                      lineageId="Package\Excel To Source\Product Conversion.Outputs[Data Conversion Output].Columns[Copy of Unit price]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\Product_Source.Inputs[OLE DB Destination Input].Columns[Copy of ProductLine]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="Copy of ProductLine"
+                      externalMetadataColumnId="Package\Excel To Source\Product_Source.Inputs[OLE DB Destination Input].ExternalColumns[ProductLine]"
+                      lineageId="Package\Excel To Source\Product Conversion.Outputs[Data Conversion Output].Columns[Copy of ProductLine]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Product_Source.Inputs[OLE DB Destination Input].ExternalColumns[ProductID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="ProductID" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Product_Source.Inputs[OLE DB Destination Input].ExternalColumns[UnitPrice]"
+                      dataType="r8"
+                      name="UnitPrice" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Product_Source.Inputs[OLE DB Destination Input].ExternalColumns[ProductLine]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="ProductLine" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Excel To Source\Product_Source.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Excel To Source\Product_Source.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Excel To Source\Product_Source.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Excel To Source\Product_Source.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Product_Source.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Excel To Source\Product_Source.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Excel To Source\Sales Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Sales Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Excel To Source\Sales Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Excel To Source\Sales Conversion.Inputs[Data Conversion Input].Columns[Invoice ID]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Invoice ID"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Invoice ID]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\Sales Conversion.Inputs[Data Conversion Input].Columns[Branch]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Branch"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Branch]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\Sales Conversion.Inputs[Data Conversion Input].Columns[Customer type]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Customer type"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Customer type]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\Sales Conversion.Inputs[Data Conversion Input].Columns[Gender]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Gender"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Gender]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\Sales Conversion.Inputs[Data Conversion Input].Columns[ProductID]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="ProductID"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[ProductID]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\Sales Conversion.Inputs[Data Conversion Input].Columns[Quantity]"
+                      cachedDataType="r8"
+                      cachedName="Quantity"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Quantity]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\Sales Conversion.Inputs[Data Conversion Input].Columns[Tax 5%]"
+                      cachedDataType="r8"
+                      cachedName="Tax 5%"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Tax 5%]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\Sales Conversion.Inputs[Data Conversion Input].Columns[Total]"
+                      cachedDataType="r8"
+                      cachedName="Total"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Total]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\Sales Conversion.Inputs[Data Conversion Input].Columns[Date]"
+                      cachedDataType="date"
+                      cachedName="Date"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Date]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\Sales Conversion.Inputs[Data Conversion Input].Columns[Time]"
+                      cachedDataType="date"
+                      cachedName="Time"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Time]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\Sales Conversion.Inputs[Data Conversion Input].Columns[Payment]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Payment"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Payment]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\Sales Conversion.Inputs[Data Conversion Input].Columns[cogs]"
+                      cachedDataType="r8"
+                      cachedName="cogs"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[cogs]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\Sales Conversion.Inputs[Data Conversion Input].Columns[gross margin percentage]"
+                      cachedDataType="r8"
+                      cachedName="gross margin percentage"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[gross margin percentage]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\Sales Conversion.Inputs[Data Conversion Input].Columns[gross income]"
+                      cachedDataType="r8"
+                      cachedName="gross income"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[gross income]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\Sales Conversion.Inputs[Data Conversion Input].Columns[Rating]"
+                      cachedDataType="r8"
+                      cachedName="Rating"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Rating]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Excel To Source\Sales Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of Invoice ID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="20"
+                      lineageId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of Invoice ID]"
+                      name="Copy of Invoice ID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Invoice ID]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of Branch]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="1"
+                      lineageId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of Branch]"
+                      name="Copy of Branch"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Branch]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of Customer type]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="10"
+                      lineageId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of Customer type]"
+                      name="Copy of Customer type"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Customer type]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of Gender]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="10"
+                      lineageId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of Gender]"
+                      name="Copy of Gender"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Gender]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of ProductID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="10"
+                      lineageId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of ProductID]"
+                      name="Copy of ProductID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[ProductID]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of Quantity]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of Quantity]"
+                      name="Copy of Quantity"
+                      precision="18"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Quantity]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of Tax 5%]"
+                      dataType="r4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of Tax 5%]"
+                      name="Copy of Tax 5%"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Tax 5%]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of Total]"
+                      dataType="r4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of Total]"
+                      name="Copy of Total"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Total]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of Date]"
+                      dataType="date"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of Date]"
+                      name="Copy of Date"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Date]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of Time]"
+                      dataType="date"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of Time]"
+                      name="Copy of Time"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Time]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of Payment]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="20"
+                      lineageId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of Payment]"
+                      name="Copy of Payment"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Payment]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of cogs]"
+                      dataType="r4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of cogs]"
+                      name="Copy of cogs"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[cogs]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of gross margin percentage]"
+                      dataType="r4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of gross margin percentage]"
+                      name="Copy of gross margin percentage"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[gross margin percentage]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of gross income]"
+                      dataType="r4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of gross income]"
+                      name="Copy of gross income"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[gross income]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of Rating]"
+                      dataType="r4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of Rating]"
+                      name="Copy of Rating"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Rating]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Excel To Source\Sales Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Excel To Source\Sales Source Excel"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="Sales Source Excel"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">supermarket_sales$</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Excel To Source\Sales Source Excel.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Sales Source]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Sales Source]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Invoice ID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].ExternalColumns[Invoice ID]"
+                      length="255"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Invoice ID]"
+                      name="Invoice ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Branch]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].ExternalColumns[Branch]"
+                      length="255"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Branch]"
+                      name="Branch"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Customer type]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].ExternalColumns[Customer type]"
+                      length="255"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Customer type]"
+                      name="Customer type"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Gender]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].ExternalColumns[Gender]"
+                      length="255"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Gender]"
+                      name="Gender"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[ProductID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].ExternalColumns[ProductID]"
+                      length="255"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[ProductID]"
+                      name="ProductID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Quantity]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].ExternalColumns[Quantity]"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Quantity]"
+                      name="Quantity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Tax 5%]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].ExternalColumns[Tax 5%]"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Tax 5%]"
+                      name="Tax 5%"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Total]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].ExternalColumns[Total]"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Total]"
+                      name="Total"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Date]"
+                      dataType="date"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].ExternalColumns[Date]"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Date]"
+                      name="Date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Time]"
+                      dataType="date"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].ExternalColumns[Time]"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Time]"
+                      name="Time"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Payment]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].ExternalColumns[Payment]"
+                      length="255"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Payment]"
+                      name="Payment"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[cogs]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].ExternalColumns[cogs]"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[cogs]"
+                      name="cogs"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[gross margin percentage]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].ExternalColumns[gross margin percentage]"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[gross margin percentage]"
+                      name="gross margin percentage"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[gross income]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].ExternalColumns[gross income]"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[gross income]"
+                      name="gross income"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Rating]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].ExternalColumns[Rating]"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].Columns[Rating]"
+                      name="Rating"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].ExternalColumns[Invoice ID]"
+                      dataType="wstr"
+                      length="255"
+                      name="Invoice ID" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].ExternalColumns[Branch]"
+                      dataType="wstr"
+                      length="255"
+                      name="Branch" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].ExternalColumns[Customer type]"
+                      dataType="wstr"
+                      length="255"
+                      name="Customer type" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].ExternalColumns[Gender]"
+                      dataType="wstr"
+                      length="255"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].ExternalColumns[ProductID]"
+                      dataType="wstr"
+                      length="255"
+                      name="ProductID" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].ExternalColumns[Quantity]"
+                      dataType="r8"
+                      name="Quantity" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].ExternalColumns[Tax 5%]"
+                      dataType="r8"
+                      name="Tax 5%" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].ExternalColumns[Total]"
+                      dataType="r8"
+                      name="Total" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].ExternalColumns[Date]"
+                      dataType="date"
+                      name="Date" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].ExternalColumns[Time]"
+                      dataType="date"
+                      name="Time" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].ExternalColumns[Payment]"
+                      dataType="wstr"
+                      length="255"
+                      name="Payment" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].ExternalColumns[cogs]"
+                      dataType="r8"
+                      name="cogs" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].ExternalColumns[gross margin percentage]"
+                      dataType="r8"
+                      name="gross margin percentage" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].ExternalColumns[gross income]"
+                      dataType="r8"
+                      name="gross income" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output].ExternalColumns[Rating]"
+                      dataType="r8"
+                      name="Rating" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Error Output].Columns[Invoice ID]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Error Output].Columns[Invoice ID]"
+                      name="Invoice ID" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Error Output].Columns[Branch]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Error Output].Columns[Branch]"
+                      name="Branch" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Error Output].Columns[Customer type]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Error Output].Columns[Customer type]"
+                      name="Customer type" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Error Output].Columns[Gender]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Error Output].Columns[Gender]"
+                      name="Gender" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Error Output].Columns[ProductID]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Error Output].Columns[ProductID]"
+                      name="ProductID" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Error Output].Columns[Quantity]"
+                      dataType="r8"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Error Output].Columns[Quantity]"
+                      name="Quantity" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Error Output].Columns[Tax 5%]"
+                      dataType="r8"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Error Output].Columns[Tax 5%]"
+                      name="Tax 5%" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Error Output].Columns[Total]"
+                      dataType="r8"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Error Output].Columns[Total]"
+                      name="Total" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Error Output].Columns[Date]"
+                      dataType="date"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Error Output].Columns[Date]"
+                      name="Date" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Error Output].Columns[Time]"
+                      dataType="date"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Error Output].Columns[Time]"
+                      name="Time" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Error Output].Columns[Payment]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Error Output].Columns[Payment]"
+                      name="Payment" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Error Output].Columns[cogs]"
+                      dataType="r8"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Error Output].Columns[cogs]"
+                      name="cogs" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Error Output].Columns[gross margin percentage]"
+                      dataType="r8"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Error Output].Columns[gross margin percentage]"
+                      name="gross margin percentage" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Error Output].Columns[gross income]"
+                      dataType="r8"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Error Output].Columns[gross income]"
+                      name="gross income" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Error Output].Columns[Rating]"
+                      dataType="r8"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Error Output].Columns[Rating]"
+                      name="Rating" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Excel To Source\Sales_Source"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Sales_Source"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[sales_source]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Excel To Source\Sales_Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-UG2O1H4.supermarketsale_source1]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-UG2O1H4.supermarketsale_source1]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].Columns[Copy of Invoice ID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="Copy of Invoice ID"
+                      externalMetadataColumnId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].ExternalColumns[InvoiceID]"
+                      lineageId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of Invoice ID]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].Columns[Copy of Branch]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Copy of Branch"
+                      externalMetadataColumnId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].ExternalColumns[Branch]"
+                      lineageId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of Branch]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].Columns[Copy of Customer type]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Copy of Customer type"
+                      externalMetadataColumnId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].ExternalColumns[CustomerType]"
+                      lineageId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of Customer type]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].Columns[Copy of Gender]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Copy of Gender"
+                      externalMetadataColumnId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      lineageId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of Gender]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].Columns[Copy of ProductID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Copy of ProductID"
+                      externalMetadataColumnId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].ExternalColumns[ProductID]"
+                      lineageId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of ProductID]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].Columns[Copy of Quantity]"
+                      cachedDataType="numeric"
+                      cachedName="Copy of Quantity"
+                      cachedPrecision="18"
+                      externalMetadataColumnId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].ExternalColumns[Quantity]"
+                      lineageId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of Quantity]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].Columns[Copy of Tax 5%]"
+                      cachedDataType="r4"
+                      cachedName="Copy of Tax 5%"
+                      externalMetadataColumnId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].ExternalColumns[Tax5Percentage]"
+                      lineageId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of Tax 5%]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].Columns[Copy of Total]"
+                      cachedDataType="r4"
+                      cachedName="Copy of Total"
+                      externalMetadataColumnId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].ExternalColumns[Total]"
+                      lineageId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of Total]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].Columns[Copy of Date]"
+                      cachedDataType="date"
+                      cachedName="Copy of Date"
+                      externalMetadataColumnId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].ExternalColumns[Date]"
+                      lineageId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of Date]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].Columns[Copy of Time]"
+                      cachedDataType="date"
+                      cachedName="Copy of Time"
+                      externalMetadataColumnId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].ExternalColumns[Time]"
+                      lineageId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of Time]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].Columns[Copy of Payment]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="Copy of Payment"
+                      externalMetadataColumnId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].ExternalColumns[Payment]"
+                      lineageId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of Payment]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].Columns[Copy of cogs]"
+                      cachedDataType="r4"
+                      cachedName="Copy of cogs"
+                      externalMetadataColumnId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].ExternalColumns[Cogs]"
+                      lineageId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of cogs]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].Columns[Copy of gross margin percentage]"
+                      cachedDataType="r4"
+                      cachedName="Copy of gross margin percentage"
+                      externalMetadataColumnId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].ExternalColumns[GrossMarginPercentage]"
+                      lineageId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of gross margin percentage]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].Columns[Copy of gross income]"
+                      cachedDataType="r4"
+                      cachedName="Copy of gross income"
+                      externalMetadataColumnId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].ExternalColumns[GrossIncome]"
+                      lineageId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of gross income]" />
+                    <inputColumn
+                      refId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].Columns[Copy of Rating]"
+                      cachedDataType="r4"
+                      cachedName="Copy of Rating"
+                      externalMetadataColumnId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].ExternalColumns[Rating]"
+                      lineageId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output].Columns[Copy of Rating]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].ExternalColumns[InvoiceID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="InvoiceID" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].ExternalColumns[Branch]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Branch" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].ExternalColumns[CustomerType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="CustomerType" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].ExternalColumns[ProductID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="ProductID" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].ExternalColumns[Quantity]"
+                      dataType="i4"
+                      name="Quantity" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].ExternalColumns[Tax5Percentage]"
+                      dataType="r8"
+                      name="Tax5Percentage" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].ExternalColumns[Total]"
+                      dataType="r8"
+                      name="Total" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].ExternalColumns[Date]"
+                      dataType="dbDate"
+                      name="Date" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].ExternalColumns[Time]"
+                      dataType="dbTime2"
+                      name="Time"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].ExternalColumns[Payment]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="Payment" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].ExternalColumns[Cogs]"
+                      dataType="r8"
+                      name="Cogs" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].ExternalColumns[GrossMarginPercentage]"
+                      dataType="r8"
+                      name="GrossMarginPercentage" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].ExternalColumns[GrossIncome]"
+                      dataType="r8"
+                      name="GrossIncome" />
+                    <externalMetadataColumn
+                      refId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input].ExternalColumns[Rating]"
+                      dataType="r8"
+                      name="Rating" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Excel To Source\Sales_Source.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales_Source.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Excel To Source\Sales_Source.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Excel To Source\Sales_Source.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Excel To Source\Sales_Source.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Excel To Source.Paths[Data Conversion Output]"
+              endId="Package\Excel To Source\Sales_Source.Inputs[OLE DB Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\Excel To Source\Sales Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Excel To Source.Paths[Data Conversion Output1]"
+              endId="Package\Excel To Source\City_Source.Inputs[OLE DB Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\Excel To Source\City Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Excel To Source.Paths[Data Conversion Output2]"
+              endId="Package\Excel To Source\Productline_Source.Inputs[OLE DB Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\Excel To Source\Productline Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Excel To Source.Paths[Data Conversion Output3]"
+              endId="Package\Excel To Source\Product_Source.Inputs[OLE DB Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\Excel To Source\Product Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Excel To Source.Paths[Excel Source Output]"
+              endId="Package\Excel To Source\Sales Conversion.Inputs[Data Conversion Input]"
+              name="Excel Source Output"
+              startId="Package\Excel To Source\Sales Source Excel.Outputs[Excel Source Output]" />
+            <path
+              refId="Package\Excel To Source.Paths[Excel Source Output1]"
+              endId="Package\Excel To Source\City Conversion.Inputs[Data Conversion Input]"
+              name="Excel Source Output"
+              startId="Package\Excel To Source\City Source  Excel.Outputs[Excel Source Output]" />
+            <path
+              refId="Package\Excel To Source.Paths[Excel Source Output2]"
+              endId="Package\Excel To Source\Productline Conversion.Inputs[Data Conversion Input]"
+              name="Excel Source Output"
+              startId="Package\Excel To Source\Productline Source  Excel.Outputs[Excel Source Output]" />
+            <path
+              refId="Package\Excel To Source.Paths[Excel Source Output3]"
+              endId="Package\Excel To Source\Product Conversion.Inputs[Data Conversion Input]"
+              name="Excel Source Output"
+              startId="Package\Excel To Source\Product Source Excel.Outputs[Excel Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Excel To Source"
+          TopLeft="420,170" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Excel To Source">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="198,42"
+          Id="Package\Excel To Source\Productline Source  Excel"
+          TopLeft="505,71" />
+        <NodeLayout
+          Size="135,42"
+          Id="Package\Excel To Source\City_Source"
+          TopLeft="290,286" />
+        <NodeLayout
+          Size="153,42"
+          Id="Package\Excel To Source\Product_Source"
+          TopLeft="728,286" />
+        <NodeLayout
+          Size="159,42"
+          Id="Package\Excel To Source\Sales Conversion"
+          TopLeft="56,191" />
+        <NodeLayout
+          Size="186,42"
+          Id="Package\Excel To Source\Productline Conversion"
+          TopLeft="494,191" />
+        <NodeLayout
+          Size="170,42"
+          Id="Package\Excel To Source\Product Conversion"
+          TopLeft="713,191" />
+        <NodeLayout
+          Size="169,42"
+          Id="Package\Excel To Source\Productline_Source"
+          TopLeft="509,286" />
+        <NodeLayout
+          Size="166,42"
+          Id="Package\Excel To Source\Sales Source Excel"
+          TopLeft="52,72" />
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Excel To Source\City Source  Excel"
+          TopLeft="286,71" />
+        <NodeLayout
+          Size="152,42"
+          Id="Package\Excel To Source\City Conversion"
+          TopLeft="275,191" />
+        <NodeLayout
+          Size="141,42"
+          Id="Package\Excel To Source\Sales_Source"
+          TopLeft="71,286" />
+        <NodeLayout
+          Size="178,42"
+          Id="Package\Excel To Source\Product Source Excel"
+          TopLeft="724,71" />
+        <EdgeLayout
+          Id="Package\Excel To Source.Paths[Excel Source Output3]"
+          TopLeft="813,113">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-15,78"
+              Start="0,0"
+              End="-15,70.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,35"
+                    Point2="0,39"
+                    Point3="-4,39" />
+                  <mssgle:LineSegment
+                    End="-11,39" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-11,39"
+                    Point2="-15,39"
+                    Point3="-15,43" />
+                  <mssgle:LineSegment
+                    End="-15,70.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Excel To Source.Paths[Excel Source Output2]"
+          TopLeft="604,113">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-17,78"
+              Start="0,0"
+              End="-17,70.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,35"
+                    Point2="0,39"
+                    Point3="-4,39" />
+                  <mssgle:LineSegment
+                    End="-13,39" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-13,39"
+                    Point2="-17,39"
+                    Point3="-17,43" />
+                  <mssgle:LineSegment
+                    End="-17,70.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Excel To Source.Paths[Excel Source Output1]"
+          TopLeft="367.5,113">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-16.5,78"
+              Start="0,0"
+              End="-16.5,70.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,35"
+                    Point2="0,39"
+                    Point3="-4,39" />
+                  <mssgle:LineSegment
+                    End="-12.5,39" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-12.5,39"
+                    Point2="-16.5,39"
+                    Point3="-16.5,43" />
+                  <mssgle:LineSegment
+                    End="-16.5,70.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Excel To Source.Paths[Excel Source Output]"
+          TopLeft="135.25,114">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,77"
+              Start="0,0"
+              End="0,69.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,69.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Excel To Source.Paths[Data Conversion Output3]"
+          TopLeft="801.25,233">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53"
+              Start="0,0"
+              End="0,45.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Excel To Source.Paths[Data Conversion Output2]"
+          TopLeft="590.25,233">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53"
+              Start="0,0"
+              End="0,45.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Excel To Source.Paths[Data Conversion Output1]"
+          TopLeft="354.25,233">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53"
+              Start="0,0"
+              End="0,45.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Excel To Source.Paths[Data Conversion Output]"
+          TopLeft="138.5,233">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53"
+              Start="0,0"
+              End="0,45.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Excel To Source\City Source  Excel">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Excel To Source\Product_Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Excel To Source\Sales Source Excel">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Excel To Source\Productline_Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Excel To Source\Productline Source  Excel">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Excel To Source\Sales_Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Excel To Source\Product Source Excel">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Excel To Source\City_Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
